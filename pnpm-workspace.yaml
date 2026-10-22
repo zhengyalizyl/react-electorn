@@ -1,0 +1,11 @@
+packages:
+  - "apps/*"
+  - "demos/*"
+  - "packages/*"
+nodeLinker: hoisted
+blockExoticSubdeps: false
+allowBuilds:
+  electron: true
+  electron-winstaller: true
+  esbuild: true
+  sharp: true
