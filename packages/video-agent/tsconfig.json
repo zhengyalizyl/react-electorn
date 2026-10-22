@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "esnext",
+        "lib": ["esnext"],
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        // 与 apps/desktop 的门禁保持一致：schema 包是所有下游的共同语言，
+        // 这里松一档，下游就得在运行时替它兜底。
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "noEmit": true,
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        // 别名要三处同步：这里、vitest.config.ts，以及将来消费方的构建配置
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "types": ["node"]
+    },
+    "include": ["src/**/*", "tests/**/*", "scripts/**/*"]
+}
