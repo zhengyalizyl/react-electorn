@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "esnext",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        // strict 与 packages/schema 对齐。少了 strictNullChecks，ParseResult
+        // 这类以布尔字面量做判别的联合类型收窄不了，schema 的契约在这一侧就形同虚设。
+        // 开启时全量 0 报错，属于补上原本就该有的门禁。
+        "strict": true,
+        // strict 之外再补三个开关：noUncheckedIndexedAccess 让 arr[0] 产出
+        // T | undefined，堵掉越界访问；另两个堵可选属性与继承上的隐式行为。
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "sourceMap": true,
+        "noEmit": true,
+        "outDir": "dist",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "jsx": "react-jsx",
+        "paths": {
+            "@/renderer/*": ["./renderer/*"],
+            // 渲染层只从 client 里取**类型**（IPC 契约），不引运行时代码——
+            // client 是 Node 环境，拖着 electron 与 node:fs
+            "@/client/*": ["./client/*"]
+        },
+        "types": ["node", "./magicut.env.d.ts"]
+    },
+    "include": [
+        "renderer/**/*",
+        "client/**/*",
+        "tests/**/*",
+        "magicut.env.d.ts",
+        "forge.env.d.ts"
+    ]
+}
