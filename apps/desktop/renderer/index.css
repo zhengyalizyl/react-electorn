@@ -1,0 +1,294 @@
+@import 'tailwindcss';
+
+/* 编辑器设计令牌，与 magicut-demo.pen 的 ed-* 变量一一对应 */
+@theme {
+    --color-ed-bg: #09090b;
+    --color-ed-panel: #111114;
+    --color-ed-panel-2: #18181c;
+    --color-ed-border: #26262b;
+    --color-ed-text: #f2f2f5;
+    --color-ed-text-2: #8a8a94;
+    --color-ed-text-3: #5c5c66;
+    --color-ed-accent: #e5405a;
+
+    /* 设计稿没有这个变量，是代码侧为滚动条补的 */
+    --color-ed-scroll: #3a3a40;
+
+    /* 设计稿里以字面色值出现、又不属于上面那套 ed-* 的两处底色 */
+    /** 「使用中」这类小徽标的底 */
+    --color-ed-chip: #2a2a34;
+    /** 字幕样式色卡的底 */
+    --color-ed-swatch: #1e1e26;
+
+    --font-ed:
+        'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif,
+        system-ui, sans-serif;
+    --font-ed-mono:
+        'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas,
+        monospace;
+
+    /* 编辑器字号梯度。设计稿用的是 9-20px 的自定义梯度，和 Tailwind 默认的
+       text-xs/sm/base 对不上，散落成 text-[13px] 这类 arbitrary value 会重复几十处。
+       按 Tailwind 工程实践的"抽象阶梯"，重复且属于设计语言的值应当升级为 @theme 令牌。 */
+    --text-ed-2xs: 9px;
+    --text-ed-xs: 10px;
+    --text-ed-sm: 11px;
+    --text-ed-base: 12px;
+    --text-ed-md: 13px;
+    --text-ed-lg: 14px;
+    --text-ed-xl: 15px;
+    /* 口播面板的标题是 16px，原先梯度从 15 直接跳到 18，把它补进来并顺延后面两档 */
+    --text-ed-2xl: 16px;
+    --text-ed-3xl: 18px;
+    --text-ed-4xl: 20px;
+
+    --leading-ed: 1.55;
+    --leading-ed-tight: 1.5;
+
+    /* 音乐面板自成一套配色，取自 magicut-demo.pen 的 frame C1Sck（右侧音乐设置区）。
+       这张稿是独立探索稿，用的不是编辑器的 ed-* 那套，所以单开 mu-* 前缀，
+       不要和 ed-* 混用。 */
+    --color-mu-bg: #111214;
+    --color-mu-card: #1a1c20;
+    --color-mu-inset: #15181e;
+    --color-mu-inset-2: #111318;
+    --color-mu-border: #30343c;
+    --color-mu-border-2: #2a2f38;
+    --color-mu-chip: #22262d;
+    --color-mu-text: #f5f7fa;
+    --color-mu-text-2: #a9afba;
+    --color-mu-text-3: #6f7784;
+    --color-mu-accent: #f05f73;
+    /* 音量手柄的描边，用来在进度条上抠出一圈底色 */
+    --color-mu-knob-ring: #0e0f12;
+
+    /* 设计稿标注 Inter / Geist / Geist Mono，但本机都没装、项目也没打包字体文件，
+       实际会回退到后面的栈。列在最前是为了将来打包字体后自动生效。 */
+    --font-mu-title:
+        'Inter', 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+    --font-mu-body:
+        'Geist', 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+    --font-mu-mono:
+        'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+        monospace;
+
+    /* 项目页的配色，取自 magicut-demo.pen 的 frame tr9ry（妙剪 Magicut — 项目页）。
+       它既不是编辑器的 ed-*，也不是音乐面板的 mu-*，所以再开一套 pj-*。
+       字体沿用 --font-ed，设计稿这一页写的就是 $ed-font。 */
+    --color-pj-bg: #050509;
+    --color-pj-sidebar: #07070d;
+    --color-pj-border: #1c1c26;
+    --color-pj-pill: #12121c;
+    --color-pj-pill-border: #23232f;
+    --color-pj-icon: #1c1c28;
+    --color-pj-card: #0f1018;
+    --color-pj-card-border: #23232e;
+    /* 设计稿里第一张卡的描边更亮、且带紫色外发光，读作悬停态 */
+    --color-pj-card-border-hover: #34344a;
+    --color-pj-text: #ffffff;
+    --color-pj-text-2: #8a8a96;
+    --color-pj-nav-text: #c9c9d4;
+    /* 「创建新作品」按钮是反色的 */
+    --color-pj-invert: #f2f2f5;
+    --color-pj-invert-text: #16161c;
+
+    /* 创作页，取自 magicut-demo.pen 的 frame HzNgd（创作页-输入文稿）。
+       页面底色与侧栏和项目页同源，复用 pj-*；下面这些是这页独有的。 */
+    --color-cr-card: #0d0d15;
+    --color-cr-card-border: #20202b;
+    --color-cr-tabs: #12121a;
+    --color-cr-tab-active: #26262f;
+    --color-cr-placeholder: #8a8a96;
+    --color-cr-counter: #a6a6b2;
+    --color-cr-select: #0b0b12;
+    --color-cr-accent: #8a5cff;
+    --color-cr-menu: #12121a;
+    --color-cr-menu-border: #2a2a36;
+    --color-cr-option-active: #1e1e2a;
+    --color-cr-subhead: #9a9aa6;
+
+    /* 创作消息页，取自 magicut-demo.pen 的 frame W8bPLG（妙剪创作消息页）。
+       同一页还有一张更早的变体稿 OrZJP（准备阶段），两者色值略有出入；
+       **以 W8bPLG 为准**——它是内容最全的那张，一页只能有一套配色。
+       这页是聊天式的，自成一套，所以单开 msg-* 前缀，不要和 ed-* 混用。 */
+    --color-msg-bg: #0b0b0d;
+    --color-msg-card: #1a1c22;
+    --color-msg-border: #2a2f38;
+    /** 卡中卡：分镜列表这类嵌在消息里的块 */
+    --color-msg-inset: #181b21;
+    --color-msg-text: #f5f7fa;
+    --color-msg-text-2: #dce2ea;
+    --color-msg-text-3: #c9d0da;
+    --color-msg-text-4: #737c8c;
+    /** 配置胶囊的「键」那半边 */
+    --color-msg-chip: #3d4045;
+    /** 配置胶囊的「值」那半边 */
+    --color-msg-chip-value: #222833;
+    --color-msg-chip-text: #c5cbd6;
+
+    /* 右侧的用户确认气泡 */
+    --color-msg-user: #1e2633;
+    --color-msg-user-border: #334155;
+    --color-msg-user-text: #eaf7ff;
+
+    /* 需求文档表格 */
+    --color-msg-table: #11161d;
+    --color-msg-table-border: #252b35;
+    --color-msg-table-head: #223244;
+    --color-msg-table-head-2: #1a2530;
+    --color-msg-table-head-text: #ddebff;
+    --color-msg-table-key: #151b23;
+    --color-msg-table-row: #0f141b;
+    --color-msg-table-row-2: #111820;
+    --color-msg-table-text: #c8ced8;
+
+    /* 概览指标与状态色 */
+    --color-msg-metric: #171a20;
+    --color-msg-blue: #5b8cff;
+    --color-msg-purple: #8b6af7;
+    /** 完成 / 正常 */
+    --color-msg-done: #25d0b1;
+    /** 进行中 */
+    --color-msg-running: #f6b84b;
+    /** 完成状态条 */
+    --color-msg-ok-bg: #122821;
+    --color-msg-ok-border: #1d5747;
+    --color-msg-ok-text: #d8fff5;
+}
+
+/* 只用 webkit 伪元素，不写 scrollbar-width / scrollbar-color：
+   Chromium 里一旦出现标准属性就会忽略这组伪元素，退回 macOS 的 overlay 滚动条，
+   不滚动时完全看不见——暗色面板里需要的是常驻可见的滚动条。 */
+@utility scrollbar-ed {
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-ed-scroll);
+        border-radius: 9999px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--color-ed-text-3);
+    }
+}
+
+/* 时间线缩放滑杆。
+   用真的 <input type="range"> 而不是两个装饰 span：原先那版只是画出来的，
+   拖不动也不能用键盘。换成原生控件后自带键盘操作与读屏支持，
+   代价是要把浏览器默认外观整个抹掉再按设计稿画。 */
+@utility zoom-slider {
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+
+    &::-webkit-slider-runnable-track {
+        height: 2px;
+        border-radius: 1px;
+        background: var(--color-ed-text);
+    }
+
+    /* 轨道 2px、滑块 12px，要让滑块纵向居中就得往上提 (12 - 2) / 2 */
+    &::-webkit-slider-thumb {
+        appearance: none;
+        width: 12px;
+        height: 12px;
+        margin-top: -5px;
+        border-radius: 9999px;
+        background: var(--color-ed-text);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-ed-accent);
+        outline-offset: 4px;
+    }
+}
+
+/* 切换素材类型时右侧面板的入场动画。
+   ConfigPanel 用 key 让实现组件重挂载，动画因此每次切换都会重放。
+   位移只有 10px 且面板 overflow-hidden，不会把内容甩出边界。 */
+@keyframes ed-panel-enter {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@utility panel-enter {
+    animation: ed-panel-enter 180ms ease-out;
+}
+
+/* 图标栏选中瞬间图标弹一下。
+   类只在选中态挂上，所以每次由未选中变选中都会重新播放一次。 */
+@keyframes ed-rail-pop {
+    0% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@utility rail-pop {
+    animation: ed-rail-pop 260ms ease-out;
+}
+
+/* 选中曲目后底部操作条的入场：从下方滑入。
+   条目本身不动，只有这条从无到有，所以位移放在它自己身上。 */
+@keyframes ed-bar-rise {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@utility bar-rise {
+    animation: ed-bar-rise 200ms ease-out;
+}
+
+/* 系统开了「减少动态效果」就不要动。这里必须显式关掉：
+   animation 不是 transition，不会被浏览器自动降级。 */
+@media (prefers-reduced-motion: reduce) {
+    .panel-enter,
+    .rail-pop,
+    .bar-rise {
+        animation: none;
+    }
+}
+
+@layer base {
+    html,
+    body,
+    #root {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        font-family: var(--font-ed);
+        background: var(--color-ed-bg);
+        color: var(--color-ed-text);
+    }
+}
