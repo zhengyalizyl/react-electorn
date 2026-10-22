@@ -1,0 +1,64 @@
+{
+    "name": "magicut-react-demo",
+    "private": true,
+    "version": "1.0.0",
+    "description": "妙剪智能视频编辑器 Demo（React 版）",
+    "scripts": {
+        "start": "pnpm --filter @magicut-react-demo/desktop start",
+        "dev:desktop": "pnpm --filter @magicut-react-demo/desktop start",
+        "package": "pnpm --filter @magicut-react-demo/desktop package",
+        "package:mac": "pnpm --filter @magicut-react-demo/desktop package:mac",
+        "package:win": "pnpm --filter @magicut-react-demo/desktop package:win",
+        "make": "pnpm --filter @magicut-react-demo/desktop make",
+        "make:mac": "pnpm --filter @magicut-react-demo/desktop make:mac",
+        "make:win": "pnpm --filter @magicut-react-demo/desktop make:win",
+        "fix:electron": "node scripts/fix-electron-install.mjs",
+        "clean:vite": "node scripts/clean-vite-cache.mjs",
+        "start:clean": "node scripts/clean-vite-cache.mjs && pnpm start",
+        "ui:shot": "node scripts/ui-screenshot.mjs",
+        "e2e": "node scripts/e2e-electron.mjs",
+        "lint": "pnpm -r --if-present run lint",
+        "format": "pnpm -r --if-present run format",
+        "typecheck": "pnpm -r --if-present run typecheck",
+        "spellcheck": "cspell lint --dot --gitignore --color --cache --show-suggestions \"(packages|apps|demos)/**/*.@(html|js|cjs|mjs|ts|tsx|css|scss|md|json)\"",
+        "test": "pnpm -r --if-present run test",
+        "test:run": "pnpm -r --if-present run test:run",
+        "test:coverage": "pnpm -r --if-present run test:coverage",
+        "commit": "git-cz"
+    },
+    "keywords": [],
+    "license": "MIT",
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-git"
+        }
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "electron",
+            "electron-winstaller",
+            "esbuild",
+            "sharp"
+        ]
+    },
+    "devDependencies": {
+        "@commitlint/config-conventional": "20.0.0",
+        "@electron/get": "3.1.0",
+        "@eslint/js": "9.38.0",
+        "@stylistic/eslint-plugin": "5.10.0",
+        "commitizen": "4.3.1",
+        "commitlint": "20.1.0",
+        "cspell": "10.0.1",
+        "cz-git": "1.12.0",
+        "eslint": "9.38.0",
+        "eslint-plugin-prettier": "5.5.4",
+        "eslint-plugin-react": "7.37.5",
+        "eslint-plugin-react-hooks": "5.2.0",
+        "eslint-plugin-simple-import-sort": "12.1.1",
+        "globals": "16.4.0",
+        "playwright": "^1.64.0",
+        "prettier": "3.6.2",
+        "typescript": "5.9.3",
+        "typescript-eslint": "8.46.2"
+    }
+}
