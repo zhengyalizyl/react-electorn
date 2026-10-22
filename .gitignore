@@ -1,0 +1,71 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+.DS_Store
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# 环境变量：凭证只走这里，永远不进仓库。
+# .env.example 是不含密钥的模板，需要被提交，所以显式排除在忽略之外。
+.env
+.env.*
+!.env.example
+
+# Optional REPL history
+.node_repl_history
+
+# Output
+coverage
+*.lcov
+.next
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.webpack/
+.vite/
+out/
+apps/desktop/dist/
+
+# UI 实跑截图与临时构建产物（ui:shot）
+.ui-out/
+
+# 媒资索引产物（index-media 命令）：索引库与关键帧缩略图。
+# 全是派生数据，删掉只意味着要重扫一遍。
+.media-index/
+
+# 会话记录导出。**里面是整份对话**：大量源码片段、本机绝对路径、命令输出。
+# 同 .env 一样属于"永远不进仓库"那一类，只是原因不同——它不含密钥，
+# 但把本机目录结构和未公开的实现细节一次性带出去。
+ai-chat-export.html
+*-chat-export.html
+
+/temp
+**/*/docker/postgresql_data
+**/*/generated
+
+sample
