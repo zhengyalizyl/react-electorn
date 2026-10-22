@@ -1,0 +1,40 @@
+{
+    "name": "@magicut-react-demo/video-agent",
+    "private": true,
+    "version": "1.0.0",
+    "description": "创作智能体：分镜规划、字幕排布、音乐选择、图编排",
+    "type": "module",
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
+    "exports": {
+        ".": "./src/index.ts",
+        "./voices": "./src/tts/voices.ts",
+        "./custom-voices": "./src/tts/custom-voices.ts"
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "format": "prettier --write . && eslint --fix .",
+        "typecheck": "tsc --noEmit",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage",
+        "tag": "vite-node --options.transformMode.ssr=/.*/ -c vitest.config.ts scripts/tag-media.ts",
+        "agent": "vite-node --options.transformMode.ssr=/.*/ -c vitest.config.ts scripts/create-project.ts"
+    },
+    "dependencies": {
+        "@langchain/core": "^1.2.12",
+        "@langchain/langgraph": "^1.4.17",
+        "@langchain/langgraph-checkpoint": "^1.1.5",
+        "@langchain/openai": "^1.5.13",
+        "@magicut-react-demo/media-index": "workspace:*",
+        "@magicut-react-demo/video-project": "workspace:*",
+        "node-sqlite3-wasm": "0.8.60",
+        "zod": "4.1.12"
+    },
+    "devDependencies": {
+        "@types/node": "22.18.9",
+        "dotenv": "^17.2.3",
+        "typescript": "5.9.3",
+        "vitest": "2.1.8"
+    }
+}
